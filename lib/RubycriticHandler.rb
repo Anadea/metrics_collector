@@ -3,16 +3,15 @@ require_relative '../helper.rb'
 class RubycriticHandler
   class << self
     def call(metrics)
-      # check_availability
       run_rubycritic
       collect_data(metrics)
     end
 
     private
 
-    def check_availability
-      system('gem install rubycritic') unless system('gem list -i rubycritic')
-    end
+    # def check_availability
+    #   system('gem install rubycritic') unless system('gem list -i rubycritic')
+    # end
 
     def run_rubycritic
       system('rubycritic --format json')

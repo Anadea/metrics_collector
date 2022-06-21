@@ -2,8 +2,6 @@ require_relative '../helper.rb'
 
 class BrakemanHandler
   class << self
-    attr_accessor :metrics
-
     def call(metrics)
       run_brakeman
       collect_data(metrics)

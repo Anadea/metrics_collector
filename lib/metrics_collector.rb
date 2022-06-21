@@ -19,7 +19,10 @@ module MetricsCollector
       collect_metrics
       generate_json
       generate_csv
+      console_output
     end
+
+    private
 
     def console_output
       METRICS.each { |metric, result| puts "#{metric}: #{result}" }
@@ -46,7 +49,7 @@ module MetricsCollector
     def generate_json
       File.open("public/metrics.json","w") do |json|
         json.write(METRICS)
-        'File generated, check public/'
+        puts 'File generated, check public/metrics.json'
       end
     end
 
