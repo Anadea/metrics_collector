@@ -3,7 +3,7 @@ require_relative '../helper.rb'
 class ClocHandler
   class << self
     def call(metrics)
-      # check_availability
+      check_availability
       run_cloc
       collect_data(metrics)
     end
