@@ -52,6 +52,5 @@ module MetricsCollector
         puts 'File generated, check public/metrics.json'
       end
     end
-
   end
 end
