@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    MetricsCollector (0.1.0)
+    metrics_collector (0.1.0)
       brakeman
       rubycritic
       simplecov
@@ -79,7 +79,7 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
-  MetricsCollector!
+  metrics_collector!
   rake
 
 BUNDLED WITH

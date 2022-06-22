@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'metrics_collector/version'
-require_relative 'BrakemanHandler.rb'
-require_relative 'ClocHandler.rb'
-require_relative 'RubycriticHandler.rb'
-require_relative 'SimplecovHandler.rb'
-require_relative '../helper.rb'
+require_relative 'metrics_collector/helper.rb'
 
 module MetricsCollector
   require 'railtie.rb' if defined?(Rails)

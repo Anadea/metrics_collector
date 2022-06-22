@@ -1,0 +1,7 @@
+require 'json'
+require 'csv'
+require_relative 'version'
+require_relative 'gem_handlers/BrakemanHandler.rb'
+require_relative 'gem_handlers/ClocHandler.rb'
+require_relative 'gem_handlers/RubycriticHandler.rb'
+require_relative 'gem_handlers/SimplecovHandler.rb'
