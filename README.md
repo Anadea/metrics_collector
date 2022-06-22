@@ -17,9 +17,11 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
-Run this rake task after installing gem into your project to collect all metrics and get output in console, json and csv
+- ### Collect all metrics and get output in json, csv and console
 
-    $ rake collect_metrics
+    ```sh
+    rake collect_metrics
+    ```
 
 - ### Get only certain metrics
 
@@ -45,6 +47,21 @@ Run this rake task after installing gem into your project to collect all metrics
     rake collect_metrics['rubycritic cloc','all']
     rake collect_metrics['all','all'] #(similar to 'rake collect_metrics')
     ```
+
+## Supported libraries/outputs
+
+- ### Supported libraries
+
+```sh
+cloc brakeman rubycritic simplecov
+```
+
+- ### Supported output formats
+
+```sh
+console csv json
+```
+
 
 ## License
 
