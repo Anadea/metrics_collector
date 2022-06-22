@@ -9,10 +9,6 @@ class RubycriticHandler
 
     private
 
-    # def check_availability
-    #   system('gem install rubycritic') unless system('gem list -i rubycritic')
-    # end
-
     def run_rubycritic
       system('rubycritic --format json')
     end

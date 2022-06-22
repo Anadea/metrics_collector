@@ -10,41 +10,16 @@ module MetricsCollector
   class << self
     METRICS = {}
 
-    def full_download
-      collect_metrics
-      generate_json
-      generate_csv
-      console_output
+    def call(libraries)
+      collect_metrics(libraries)
+      METRICS
     end
 
     private
-
-    def console_output
-      METRICS.each { |metric, result| puts "#{metric}: #{result}" }
-    end
   
-    def collect_metrics
-      BrakemanHandler.call(METRICS)
-      ClocHandler.call(METRICS)
-      RubycriticHandler.call(METRICS)
-      Simplecov.call(METRICS)
-    end
-  
-    def clean_generated_files
-      system('rm stats.json brakeman.json tmp/rubycritic/report.json .clocignore')
-    end
-  
-    def generate_csv
-      CSV.open("public/metrics.csv", "wb") do |csv|
-        csv << [Time.now.utc.strftime("%d/%m/%Y %H:%M"), 'dd/mm/yy']
-        METRICS.to_a.each { |metric| csv << metric }
-      end
-    end
-  
-    def generate_json
-      File.open("public/metrics.json","w") do |json|
-        json.write(METRICS)
-        puts 'File generated, check public/metrics.json'
+    def collect_metrics(libraries)
+      libraries.each do |library|
+        (library.downcase.capitalize + 'Handler').constantize.call(METRICS)
       end
     end
   end

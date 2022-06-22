@@ -9,16 +9,12 @@ class BrakemanHandler
 
     private
 
-    # def check_availability
-    #   system("gem install brakeman -v 5.1.2") unless system("gem list -i brakeman")
-    # end
-
     def run_brakeman
       system('brakeman -f json -o public/brakeman.json --force')
     end
 
     def collect_data(metrics)
-      # return 'brakeman.json not found' unless File.exist?('brakeman.json')
+      return 'brakeman.json not found' unless File.exist?('public/brakeman.json')
 
       brakeman = File.read('public/brakeman.json')
       brakeman_result = JSON.parse(brakeman)

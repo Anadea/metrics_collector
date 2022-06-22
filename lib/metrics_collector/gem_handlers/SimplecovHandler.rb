@@ -1,4 +1,4 @@
-class Simplecov
+class SimplecovHandler
   class << self
     def call(metrics)
       collect_data(metrics)
@@ -12,7 +12,7 @@ class Simplecov
       simplecov = File.read('public/coverage/.last_run.json')
       simplecov_result = JSON.parse(simplecov)
       metrics[:Coverage] = simplecov_result['result']['line']
-      # METRICS[:Coverage] = simplecov_result['result']['covered_percent'] ???
+      # METRICS[:Coverage] = simplecov_result['result']['covered_percent']
     end
   end
 end
