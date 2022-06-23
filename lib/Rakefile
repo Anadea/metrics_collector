@@ -1,4 +1,6 @@
-require 'MetricsCollector.rb'
+# frozen_string_literal: true
+
+require 'MetricsCollector'
 
 path = File.expand_path(__dir__)
 Dir.glob("#{path}/tasks/**/*.rake").each { |f| import f }

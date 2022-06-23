@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 RSpec.describe ClocHandler do
   context 'cloc handler' do
-    let!(:metrics) { { } }
+    let!(:metrics) { {} }
     let!(:cloc_report) { File.read('spec/helpers/cloc_report.json') }
 
     it 'collects metrics' do
@@ -10,7 +12,7 @@ RSpec.describe ClocHandler do
       allow(File).to receive(:read).and_return(cloc_report)
 
       described_class.call(metrics)
-      expect(metrics).to eq({ Cloc_total_lines: 455292, Cloc_total_files: 1859})
+      expect(metrics).to eq({ Cloc_total_lines: 455_292, Cloc_total_files: 1859 })
     end
   end
 end

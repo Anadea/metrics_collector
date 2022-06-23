@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 RSpec.describe RubycriticHandler do
   context 'rubycritic handler' do
-    let!(:metrics) { { } }
+    let!(:metrics) { {} }
     let!(:rubycritic_report) { File.read('spec/helpers/rubycritic_report.json') }
 
     it 'collects metrics' do
@@ -9,7 +11,7 @@ RSpec.describe RubycriticHandler do
       allow(File).to receive(:read).and_return(rubycritic_report)
 
       described_class.call(metrics)
-      expect(metrics).to eq( {Rubycritic_score: 66.81 })
+      expect(metrics).to eq({ Rubycritic_score: 66.81 })
     end
   end
 end

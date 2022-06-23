@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # lib/railtie.rb
 require 'metrics_collector'
 require 'rails'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # require_relative '../helper.rb'
 
 class ClocHandler
@@ -11,11 +13,11 @@ class ClocHandler
     private
 
     def check_availability
-      system("apt-get install -y cloc") unless system("ldconfig -p | grep cloc")
+      system('apt-get install -y cloc') unless system('ldconfig -p | grep cloc')
     end
 
     def run_cloc
-      cloc = File.open(".clocignore", "w") {|f| f.write("node_modules\ntmp\npublic") }
+      cloc = File.open('.clocignore', 'w') { |f| f.write("node_modules\ntmp\npublic") }
       system("cloc --json --out=stats.json --exclude-dir=$(tr '\n' ',' < .clocignore) .")
     end
 

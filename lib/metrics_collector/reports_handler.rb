@@ -1,4 +1,6 @@
-require_relative 'helper.rb'
+# frozen_string_literal: true
+
+require_relative 'helper'
 
 module ReportsHandler
   class << self
@@ -10,7 +12,7 @@ module ReportsHandler
 
     def generate_reports(output, metrics)
       output.each do |option|
-        (option.downcase.capitalize + 'Generator').constantize.call(metrics)
+        "#{option.downcase.capitalize}Generator".constantize.call(metrics)
       end
     end
   end

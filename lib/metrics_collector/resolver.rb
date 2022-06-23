@@ -1,4 +1,6 @@
-require_relative 'helper.rb'
+# frozen_string_literal: true
+
+require_relative 'helper'
 
 module Resolver
   class << self

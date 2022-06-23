@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe JsonGenerator do
   context 'json generator' do
     let!(:metrics) { { cloc_total_files: 10, cloc_total_lines: 124 } }
@@ -9,7 +11,7 @@ RSpec.describe JsonGenerator do
     end
 
     it 'json generates with expected params' do
-      buffer = StringIO.new()
+      buffer = StringIO.new
       allow(File).to receive(:open).with('public/metrics.json', 'w').and_yield(buffer)
       described_class.call(metrics)
       expect(eval(buffer.string)).to eq(metrics)

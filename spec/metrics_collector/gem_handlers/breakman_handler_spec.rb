@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 RSpec.describe BrakemanHandler do
   context 'breakman handler' do
-    let!(:metrics) { { } }
+    let!(:metrics) { {} }
     let!(:brakeman_report) { File.read('spec/helpers/brakeman_report.json') }
 
     it 'collects metrics' do
@@ -9,7 +11,7 @@ RSpec.describe BrakemanHandler do
       allow(File).to receive(:read).and_return(brakeman_report)
 
       described_class.call(metrics)
-      expect(metrics).to eq({Brakeman_errors: nil, Brakeman_warnings: 4, Brakeman_ignored_warnings: nil})
+      expect(metrics).to eq({ Brakeman_errors: nil, Brakeman_warnings: 4, Brakeman_ignored_warnings: nil })
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ConsoleGenerator
   class << self
     def call(metrics)
