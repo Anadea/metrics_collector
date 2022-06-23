@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe SimplecovHandler do
   context 'simplecov handler' do
     let!(:metrics) { {} }

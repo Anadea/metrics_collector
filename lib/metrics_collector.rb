@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'metrics_collector/helper'
 
 module MetricsCollector
@@ -8,7 +6,7 @@ module MetricsCollector
   class Error < StandardError; end
 
   class << self
-    METRICS = {}.freeze
+    METRICS = {}
 
     def call(libraries)
       collect_metrics(libraries)

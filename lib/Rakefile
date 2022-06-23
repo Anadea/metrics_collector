@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'MetricsCollector'
 
 path = File.expand_path(__dir__)

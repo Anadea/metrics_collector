@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module JsonGenerator
   class << self
     def call(metrics)

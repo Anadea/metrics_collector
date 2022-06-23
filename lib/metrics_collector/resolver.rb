@@ -1,11 +1,11 @@
-# frozen_string_literal: true
-
 require_relative 'helper'
 
 module Resolver
   class << self
     def call(libraries, output)
-      check_params(libraries, output)
+      validate_libs(libraries)
+      validate_outputs(output)
+
       metrics = call_handlers(libraries)
       generate_reports(output, metrics)
     end
@@ -34,12 +34,18 @@ module Resolver
       output
     end
 
-    def check_params(libraries, output)
+    def validate_libs(libraries)
+      return if libraries == 'all'
+
       if !libraries.nil?
         unless (libraries.split(' ').map(&:downcase) - SupportedLibs::SUPPORTED_LIBRARIES.split(' ').map(&:downcase)).empty?
           raise 'One of the requested libraries is not supported'
         end
       end
+    end
+
+    def validate_outputs(output)
+      return if output == 'all'
 
       if !output.nil?
         unless (output.split(' ').map(&:downcase) - SupportedOutput::SUPPORTED_OUTPUT.split(' ').map(&:downcase)).empty?

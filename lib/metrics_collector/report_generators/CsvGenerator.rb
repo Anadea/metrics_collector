@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module CsvGenerator
   class << self
     def call(metrics)

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe CsvGenerator do
   context 'csv generator' do
     subject(:csv_file) { described_class.call(metrics) }

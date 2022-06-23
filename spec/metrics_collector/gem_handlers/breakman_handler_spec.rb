@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe BrakemanHandler do
   context 'breakman handler' do
     let!(:metrics) { {} }

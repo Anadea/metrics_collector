@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe ClocHandler do
   context 'cloc handler' do
     let!(:metrics) { {} }

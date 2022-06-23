@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec.describe RubycriticHandler do
   context 'rubycritic handler' do
     let!(:metrics) { {} }
