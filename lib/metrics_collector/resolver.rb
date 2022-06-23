@@ -35,12 +35,16 @@ module Resolver
     end
 
     def check_params(libraries, output)
-      unless (libraries.split(' ').map(&:downcase) - SupportedLibs::SUPPORTED_LIBRARIES.split(' ').map(&:downcase)).empty?
-        raise 'One of the requested libraries is not supported'
+      if !libraries.nil?
+        unless (libraries.split(' ').map(&:downcase) - SupportedLibs::SUPPORTED_LIBRARIES.split(' ').map(&:downcase)).empty?
+          raise 'One of the requested libraries is not supported'
+        end
       end
 
-      unless (output.split(' ').map(&:downcase) - SupportedOutput::SUPPORTED_OUTPUT.split(' ').map(&:downcase)).empty?
-        raise 'One of the requested outputs is not supported'
+      if !output.nil?
+        unless (output.split(' ').map(&:downcase) - SupportedOutput::SUPPORTED_OUTPUT.split(' ').map(&:downcase)).empty?
+          raise 'One of the requested outputs is not supported'
+        end
       end
     end
   end
