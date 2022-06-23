@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "MetricsCollector"
+require "metrics_collector"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
