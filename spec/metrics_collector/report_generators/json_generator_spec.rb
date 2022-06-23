@@ -13,6 +13,7 @@ RSpec.describe JsonGenerator do
     it 'json generates with expected params' do
       buffer = StringIO.new
       allow(File).to receive(:open).with('public/metrics.json', 'w').and_yield(buffer)
+
       described_class.call(metrics)
       expect(eval(buffer.string)).to eq(metrics)
     end
