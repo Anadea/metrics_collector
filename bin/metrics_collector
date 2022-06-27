@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'metrics_collector'
+require_relative '../lib/metrics_collector/helper'
+require 'optionparser'
+require 'optparse'
+require 'ostruct'
+
+class OptparseMetrics
+  def self.parse(args)
+    options = OpenStruct.new
+    options.library = []
+    options.inplace = false
+    options.encoding = "utf8"
+    options.transfer_type = :auto
+    options.verbose = false
+
+    opt_parser = OptionParser.new do |opts|
+      opts.banner = "Available output formats: csv, json, console.\nAvailable libraries for metrics: cloc, brakeman, simplecov, rubycritic"
+
+      opts.separator ""
+      opts.separator "Specific options:"
+
+      opts.on("-o", "--outputs x,y,z", Array, "List of outputs for metrics") do |outputs|
+        options.outputs = outputs.map(&:downcase)
+      end
+
+      opts.on("-l", "--libraries x,y,z", Array, "List of libraries.") do |libraries|
+        options.libraries = libraries.map(&:downcase)
+      end
+
+      opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+        options.verbose = v
+      end
+
+      opts.separator ""
+      opts.separator "Common options:"
+
+      opts.on_tail("-h", "--help", "Show available commands") do
+        puts opts
+        exit
+      end
+
+      opts.on_tail("--version", "Show version") do
+        puts ::Version.join('.')
+        exit
+      end
+    end
+
+    opt_parser.parse!(args)
+    options
+  end
+end
+
+options = OptparseMetrics.parse(ARGV)
+
+Resolver.call(options.libraries, options.outputs)

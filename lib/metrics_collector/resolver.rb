@@ -14,12 +14,12 @@ module Resolver
 
     def call_handlers(libraries)
       libraries = check_libs(libraries)
-      MetricsCollector.call(libraries.split(' '))
+      MetricsCollector.call(libraries)
     end
 
     def generate_reports(output, metrics)
       output = check_output(output)
-      ReportsHandler.call(output.split(' '), metrics)
+      ReportsHandler.call(output, metrics)
     end
 
     def check_libs(libraries)
@@ -38,7 +38,7 @@ module Resolver
       return if libraries == 'all'
 
       if !libraries.nil?
-        unless (libraries.split(' ').map(&:downcase) - SupportedLibs::SUPPORTED_LIBRARIES.split(' ').map(&:downcase)).empty?
+        unless (libraries - SupportedLibs::SUPPORTED_LIBRARIES.split(' ').map(&:downcase)).empty?
           raise 'One of the requested libraries is not supported'
         end
       end
@@ -48,7 +48,7 @@ module Resolver
       return if output == 'all'
 
       if !output.nil?
-        unless (output.split(' ').map(&:downcase) - SupportedOutput::SUPPORTED_OUTPUT.split(' ').map(&:downcase)).empty?
+        unless (output - SupportedOutput::SUPPORTED_OUTPUT.split(' ').map(&:downcase)).empty?
           raise 'One of the requested outputs is not supported'
         end
       end

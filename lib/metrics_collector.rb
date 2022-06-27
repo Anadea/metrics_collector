@@ -1,4 +1,5 @@
 require_relative 'metrics_collector/helper'
+require 'active_support/inflector'
 
 module MetricsCollector
   require 'railtie' if defined?(Rails)
@@ -16,8 +17,11 @@ module MetricsCollector
     private
 
     def collect_metrics(libraries)
-      libraries.each do |library|
-        "#{library.downcase.capitalize}Handler".constantize.call(METRICS)
+      libraries = libraries.split(' ') unless libraries.is_a?(Array)
+      handlers = libraries.map(&:downcase).map(&:capitalize).map{ |lib| lib + 'Handler' }
+
+      handlers.each do |library|
+        library.constantize.call(METRICS)
       end
     end
   end

@@ -20,7 +20,7 @@ If bundler is not being used to manage dependencies, install the gem by executin
 - ### Collect all metrics and get output in json, csv and console
 
     ```sh
-    rake collect_metrics
+    bundle exec metrics_collector
     ```
 
 - ### Get only certain metrics
@@ -29,7 +29,7 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 
     ```sh
-    rake collect_metrics['cloc brakeman']
+    bundle exec metrics_collector -l cloc,rubycritic
     ```
 - ### Different output options
 
@@ -37,15 +37,7 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 
     ```sh
-    rake collect_metrics['cloc brakeman','json csv']
-    ```
-
-    You can also pass 'all' as an argument
-    
-    ```sh
-    rake collect_metrics['all','csv console']
-    rake collect_metrics['rubycritic cloc','all']
-    rake collect_metrics['all','all'] #(similar to 'rake collect_metrics')
+    bundle exec metrics_collector -o console,csv
     ```
 
 ## Supported libraries/outputs
