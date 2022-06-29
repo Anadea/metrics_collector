@@ -17,7 +17,6 @@ module MetricsCollector
     private
 
     def collect_metrics(libraries)
-      libraries = libraries.split(' ') unless libraries.is_a?(Array)
       handlers = libraries.map(&:downcase).map(&:capitalize).map{ |lib| lib + 'Handler' }
 
       handlers.each do |library|

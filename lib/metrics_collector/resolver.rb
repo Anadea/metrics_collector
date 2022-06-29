@@ -38,7 +38,7 @@ module Resolver
       return if libraries == 'all'
 
       if !libraries.nil?
-        unless (libraries - SupportedLibs::SUPPORTED_LIBRARIES.split(' ').map(&:downcase)).empty?
+        unless (libraries - SupportedLibs::SUPPORTED_LIBRARIES)
           raise 'One of the requested libraries is not supported'
         end
       end
@@ -48,7 +48,7 @@ module Resolver
       return if output == 'all'
 
       if !output.nil?
-        unless (output - SupportedOutput::SUPPORTED_OUTPUT.split(' ').map(&:downcase)).empty?
+        unless (output - SupportedOutput::SUPPORTED_OUTPUT)
           raise 'One of the requested outputs is not supported'
         end
       end
