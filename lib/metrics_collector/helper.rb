@@ -13,10 +13,8 @@ require_relative 'report_generators/CsvGenerator'
 
 module SupportedLibs
   SUPPORTED_LIBRARIES = ['cloc', 'brakeman', 'simplecov', 'rubycritic']
-  # .split(' ').map(&:downcase)
 end
 
 module SupportedOutput
   SUPPORTED_OUTPUT = ['csv', 'json', 'console']
-    # .split(' ').map(&:downcase)
 end
