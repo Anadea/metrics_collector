@@ -1,9 +1,7 @@
 # MetricsCollector
 
-MetricsCollector is a flexible ruby tool designed to collect different metrics from projects.
-MetricsCollector automaticaly checks for all required libraries and installs them if you miss anything.
-Apart from getting an output at the console you can also download the results in json or csv.
-Currently MetricsCollector supports only cloc, brakeman, rubycritic and simplecov. Feel free to contribute.
+MetricsCollector is a gem for Ruby on Rails designed to collect different metrics from projects,
+it provides commands to collect metrics from cloc, brakeman, rubycritic and simplecov.
 
 ## Installation
 

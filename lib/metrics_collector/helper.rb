@@ -12,9 +12,9 @@ require_relative 'report_generators/JsonGenerator'
 require_relative 'report_generators/CsvGenerator'
 
 module SupportedLibs
-  SUPPORTED_LIBRARIES = 'cloc brakeman simplecov rubycritic'.split(' ').map(&:downcase)
+  SUPPORTED_LIBRARIES = ['cloc', 'brakeman', 'simplecov', 'rubycritic']
 end
 
 module SupportedOutput
-  SUPPORTED_OUTPUT = 'csv json console'.split(' ').map(&:downcase)
+  SUPPORTED_OUTPUT = ['csv', 'json', 'console']
 end
