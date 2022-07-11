@@ -30,6 +30,10 @@ class OptparseMetrics
         options.libraries = libraries.map(&:downcase)
       end
 
+      opts.on("-sl", "--slack", "Sends outputs to slack.") do |slack|
+        options.slack = true
+      end
+
       opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
         options.verbose = v
       end
@@ -55,4 +59,4 @@ end
 
 options = OptparseMetrics.parse(ARGV)
 
-Resolver.call(options.libraries, options.outputs)
+Resolver.call(options.libraries, options.outputs, options.slack)

@@ -10,6 +10,7 @@ require_relative 'gem_handlers/SimplecovHandler'
 require_relative 'report_generators/ConsoleGenerator'
 require_relative 'report_generators/JsonGenerator'
 require_relative 'report_generators/CsvGenerator'
+require_relative 'report_generators/SlackNotifier'
 
 module SupportedLibs
   SUPPORTED_LIBRARIES = ['cloc', 'brakeman', 'simplecov', 'rubycritic']
