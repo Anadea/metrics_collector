@@ -7,7 +7,7 @@ class SlackNotifier
 		def call
 			uri = URI.parse("https://slack.com/api/files.upload")
 
-			token = 'xoxp-146698882176-2315747133040-3782723692659-8b84f30f6bb7389b053be5d6455fe2d7'
+			token = 'xoxp-146698882176-2315747133040-3783456501091-50ec6fa6f65c82cdb321c9f9476d3ce4'
 			headers = {
 				'Accept' => 'multipart/form-data',
 				'Content-Type' => 'multipart/form-data',
@@ -19,7 +19,7 @@ class SlackNotifier
 
 
 			request = Net::HTTP::Post.new(uri.request_uri, headers)
-			form_data = [['file', File.open('public/metrics.json')],
+			form_data = [['file', File.open('metrics.json')],
 									 ['channels', 'C03NFLHAVD3']
 									]
 
