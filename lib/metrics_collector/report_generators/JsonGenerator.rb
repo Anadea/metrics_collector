@@ -1,3 +1,5 @@
+require 'json'
+
 module JsonGenerator
   class << self
     def call(metrics)
@@ -8,7 +10,7 @@ module JsonGenerator
 
     def generate_json(metrics)
       File.open('public/metrics.json', 'w') do |json|
-        json.write(metrics)
+        json.write(metrics.to_json)
         puts 'Json generated, check public/metrics.json'
       end
     end
