@@ -3,11 +3,12 @@ require 'uri'
 
 class SlackNotifier
 	class << self
-		# def call(outputs) # pass formatted requested outputs
-		def call
+		def call(oauth) # pass formatted requested outputs
+			p '0' * 80
+			p oauth
 			uri = URI.parse("https://slack.com/api/files.upload")
+			token = oauth
 
-			token = 'xoxp-146698882176-2315747133040-3783456501091-50ec6fa6f65c82cdb321c9f9476d3ce4'
 			headers = {
 				'Accept' => 'multipart/form-data',
 				'Content-Type' => 'multipart/form-data',
@@ -19,7 +20,7 @@ class SlackNotifier
 
 
 			request = Net::HTTP::Post.new(uri.request_uri, headers)
-			form_data = [['file', File.open('metrics.json')],
+			form_data = [['file', File.open('public/metrics.json')],
 									 ['channels', 'C03NFLHAVD3']
 									]
 

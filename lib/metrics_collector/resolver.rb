@@ -2,12 +2,12 @@ require_relative 'helper'
 
 module Resolver
   class << self
-    def call(libraries, output, slack)
+    def call(libraries, output, slack, token)
       validate_libs(libraries)
       validate_outputs(output)
 
       metrics = call_handlers(libraries)
-      generate_reports(output, metrics, slack)
+      generate_reports(output, metrics, slack, token)
     end
 
     private
@@ -17,11 +17,11 @@ module Resolver
       MetricsCollector.call(libraries)
     end
 
-    def generate_reports(output, metrics, slack)
+    def generate_reports(output, metrics, slack, token)
       output = check_output(output)
       ReportsHandler.call(output, metrics)
       # SlackNotifier.call(output) if slack
-      SlackNotifier.call if slack
+      SlackNotifier.call(token) if slack
     end
 
     def check_libs(libraries)

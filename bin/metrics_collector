@@ -34,6 +34,10 @@ class OptparseMetrics
         options.slack = true
       end
 
+      opts.on("-t", "--token TOKEN", "User OAuth Token for slack.") do |token|
+        options.token = token
+      end
+
       opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
         options.verbose = v
       end
@@ -58,5 +62,11 @@ class OptparseMetrics
 end
 
 options = OptparseMetrics.parse(ARGV)
+p '1' * 80
+p options.libraries
+p options.outputs 
+p options.slack
+p options.token
 
-Resolver.call(options.libraries, options.outputs, options.slack)
+
+Resolver.call(options.libraries, options.outputs, options.slack, options.token)
