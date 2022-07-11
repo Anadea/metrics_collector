@@ -7,7 +7,7 @@ class SlackNotifier
 		def call
 			uri = URI.parse("https://slack.com/api/files.upload")
 
-			token = 'xoxb-146698882176-3766561096947-mPNKpzH5N8bMTyyHUgijvUpg'
+			token = 'xoxp-146698882176-2315747133040-3782723692659-8b84f30f6bb7389b053be5d6455fe2d7'
 			headers = {
 				'Accept' => 'multipart/form-data',
 				'Content-Type' => 'multipart/form-data',
@@ -156,7 +156,10 @@ end
 # p client.start!
 # p client.auth_test
 
-# curl -F file=@/Users/danyil/Desktop/Anadea/metrics_collector/metrics.json -F "initial_comment=idk" -F channels=T4ALJRY56/B03N40ME9L7 -H "Authorization: Bearer xoxe.xoxp-1-Mi0yLTE0NjY5ODg4MjE3Ni0yMzE1NzQ3MTMzMDQwLTM3NzQ4NjM4MjQ2NDItMzc3NzI4MjI2NTU1Ni02NDdiYmRjYzFjZDdlOTk5ZjFmYTZjNDc1OWY0ZTU5YjEwZTc4MDVkYzQ2Yjg3Y2MyNmVmOWEwYmM1NjBmMDgy" https://slack.com/api/files.upload
+# curl -F file=@public/metrics.json -F "initial_comment=user test" -F channels=C03NFLHAVD3 -H "Authorization: Bearer xoxe.xoxp-1-Mi0yLTE0NjY5ODg4MjE3Ni0yMzE1NzQ3MTMzMDQwLTM3NzQ4NjM4MjQ2NDItMzc3NzI4MjI2NTU1Ni02NDdiYmRjYzFjZDdlOTk5ZjFmYTZjNDc1OWY0ZTU5YjEwZTc4MDVkYzQ2Yjg3Y2MyNmVmOWEwYmM1NjBmMDgy" https://slack.com/api/files.upload
+# curl -F file=@public/metrics.json -F "initial_comment=user test" -F channels=C03NFLHAVD3 -H "Authorization: Bearer xoxp-146698882176-2315747133040-3782723692659-8b84f30f6bb7389b053be5d6455fe2d7" https://slack.com/api/files.upload
+
+
 
 # xoxb-146698882176-3766561096947-HfWwuJqnvdR1n0ddrzX6YrId
 
