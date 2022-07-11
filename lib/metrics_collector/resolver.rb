@@ -20,7 +20,8 @@ module Resolver
     def generate_reports(output, metrics, slack)
       output = check_output(output)
       ReportsHandler.call(output, metrics)
-      SlackNotifier.call(output) if slack
+      # SlackNotifier.call(output) if slack
+      SlackNotifier.call if slack
     end
 
     def check_libs(libraries)
