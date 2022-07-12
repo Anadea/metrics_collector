@@ -3,38 +3,35 @@ require 'uri'
 
 class SlackNotifier
 	class << self
-		def call(oauth) # pass formatted requested outputs
-			p '0' * 80
-			p oauth
+		def call(channels, token)
 			uri = URI.parse("https://slack.com/api/files.upload")
-			token = oauth
 
 			headers = {
-				'Accept' => 'multipart/form-data',
-				'Content-Type' => 'multipart/form-data',
+				'Accept' 			  => 'multipart/form-data',
+				'Content-Type'  => 'multipart/form-data',
 				'Authorization' => "Bearer #{token}"
 			}
 
 			http = Net::HTTP.new(uri.host, uri.port)
 			http.use_ssl = true
 
-
 			request = Net::HTTP::Post.new(uri.request_uri, headers)
-			form_data = [['file', File.open('public/metrics.json')],
-									 ['channels', 'C03NFLHAVD3']
+			form_data = [
+									 ['file', File.open('stats.json')],
+									 ['channels', channels]
 									]
 
 			request.set_form form_data, 'multipart/form-data'
 
 
 			response = http.request(request)
-
-			p response.body
 		end
 	end
 end
 
-
+# curl -F file=@slack_responce.json -F 'initial_comment=nines local test' -F channels=C02HBS3V64T -H 'Authorization: Bearer xoxp-146698882176-2315747133040-3785963500132-618e5f20403ca3e9ba51c38a93c6d716' https://slack.com/api/files.upload
+# https://anadea.slack.com/archives/D028D9326AJ
+# D028D9326AJ
 		# private
 
 		# def send_json

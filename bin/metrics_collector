@@ -30,12 +30,12 @@ class OptparseMetrics
         options.libraries = libraries.map(&:downcase)
       end
 
-      opts.on("-sl", "--slack", "Sends outputs to slack.") do |slack|
-        options.slack = true
-      end
+      opts.on("-sl", "--slack x,y,z", Array, "Sends outputs to slack. Pass User OAuth Token for slack API and channel id(s).") do |slack|
+        options.token    = slack.select{ |arg| arg =~ /xoxp-/ }.first
+        options.channels = slack.reject{ |arg| arg =~ /xoxp-/ }.join(', ')
 
-      opts.on("-tTOKEN", "--token TOKEN", String, "User OAuth Token for slack.") do |token|
-        options.token = token
+        raise "Please provide User OAuth Token for slack"        if options.token.empty?
+        raise "Please provide at least one channel ID for slack" if options.channels.empty?
       end
 
       opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
@@ -63,11 +63,5 @@ class OptparseMetrics
 end
 
 options = OptparseMetrics.parse(ARGV)
-p '1' * 80
-p options.libraries
-p options.outputs 
-p options.slack
-p options.token
 
-
-Resolver.call(options.libraries, options.outputs, options.slack, options.token)
+Resolver.call(options.libraries, options.outputs, options.channels, options.token)
