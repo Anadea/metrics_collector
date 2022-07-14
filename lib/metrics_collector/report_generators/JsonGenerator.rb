@@ -1,18 +1,22 @@
 require 'json'
 
-module JsonGenerator
-  class << self
-    def call(metrics)
-      generate_json(metrics)
-    end
+class JsonGenerator
+  def initialize(metrics)
+    @metrics   = metrics
+    @file_name = "#{Date.today.strftime("%e_%b_%Y_")}metrics.json"
+  end
 
-    private
+  def call
+    generate_json
+    @file_name
+  end
 
-    def generate_json(metrics)
-      File.open('public/metrics.json', 'w') do |json|
-        json.write(metrics.to_json)
-        puts 'Json generated, check public/metrics.json'
-      end
+  private
+
+  def generate_json
+    File.open("public/#{@file_name}", 'w') do |json|
+      json.write(@metrics.to_json)
+      puts "Json generated, check public/#{@file_name}"
     end
   end
 end

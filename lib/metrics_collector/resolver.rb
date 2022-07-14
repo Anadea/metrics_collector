@@ -19,8 +19,8 @@ module Resolver
 
     def generate_reports(output, metrics, channels, token)
       output = check_output(output)
-      ReportsHandler.call(output, metrics)
-      SlackNotifier.call(channels, token) if channels && token
+      paths = ReportsHandler.call(output, metrics)
+      SlackNotifier.new(channels, token, output, metrics, paths).call
     end
 
     def check_libs(libraries)

@@ -1,4 +1,7 @@
-require_relative 'metrics_collector/helper'
+require_relative 'metrics_collector/gem_handlers/BrakemanHandler'
+require_relative 'metrics_collector/gem_handlers/ClocHandler'
+require_relative 'metrics_collector/gem_handlers/RubycriticHandler'
+require_relative 'metrics_collector/gem_handlers/SimplecovHandler'
 require 'active_support/inflector'
 
 module MetricsCollector

@@ -1,16 +1,21 @@
-module CsvGenerator
-  class << self
-    def call(metrics)
-      generate_csv(metrics)
+class CsvGenerator
+  def initialize(metrics)
+    @metrics   = metrics
+    @file_name = "#{Date.today.strftime("%e_%b_%Y_")}metrics.csv"
+  end
+
+  def call
+    generate_csv
+    @file_name
+  end
+
+  private
+
+  def generate_csv
+    CSV.open("public/#{@file_name}", 'wb') do |csv|
+      @metrics.to_a.each { |metric| csv << metric }
     end
 
-    private
-
-    def generate_csv(metrics)
-      CSV.open('public/metrics.csv', 'wb') do |csv|
-        csv << [Time.now.utc.strftime('%d/%m/%Y %H:%M'), 'dd/mm/yy']
-        metrics.to_a.each { |metric| csv << metric }
-      end
-    end
+    puts "CSV generated, check public/#{@file_name}"
   end
 end

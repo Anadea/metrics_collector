@@ -3,6 +3,7 @@
 require 'bundler/setup'
 require 'metrics_collector'
 require_relative '../lib/metrics_collector/helper'
+require_relative '../lib/metrics_collector/resolver.rb'
 require 'optionparser'
 require 'optparse'
 require 'ostruct'
@@ -30,12 +31,11 @@ class OptparseMetrics
         options.libraries = libraries.map(&:downcase)
       end
 
-      opts.on("-sl", "--slack x,y,z", Array, "Sends outputs to slack. Pass User OAuth Token for slack API and channel id(s).") do |slack|
-        options.token    = slack.select{ |arg| arg =~ /xoxp-/ }.first
-        options.channels = slack.reject{ |arg| arg =~ /xoxp-/ }.join(', ')
+      opts.on("-sl", "--slack x,y,z", Array, "Sends outputs to slack. Pass User OAuth Token for slack API and channel id(s).\nPass params in the next order: token,chanel,[channel]") do |slack|
+        raise 'Wrong arguments passed. Check --help for details' unless slack.any? && slack.size >= 2
 
-        raise "Please provide User OAuth Token for slack"        if options.token.empty?
-        raise "Please provide at least one channel ID for slack" if options.channels.empty?
+        options.token    = slack[0]
+        options.channels = slack[1..-1]
       end
 
       opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
@@ -56,7 +56,6 @@ class OptparseMetrics
       end
     end
 
-    p args
     opt_parser.parse!(args)
     options
   end
