@@ -21,15 +21,13 @@ class Resolver
   end
 
   def validate_libs(libraries)
-    return SupportedLibs::SUPPORTED_LIBRARIES if libraries.nil?
-    raise 'One of the requested libraries is not supported' if (libraries - SupportedLibs::SUPPORTED_LIBRARIES).any?
+    return ['cloc', 'brakeman', 'simplecov', 'rubycritic'] if libraries.nil?
 
     libraries
   end
 
   def validate_outputs(output)
-    return SupportedOutput::SUPPORTED_OUTPUT if output.nil?
-    raise 'One of the requested outputs is not supported' if (output - SupportedOutput::SUPPORTED_OUTPUT).any?
+    return ['csv', 'json', 'console'] if output.nil?
 
     output
   end

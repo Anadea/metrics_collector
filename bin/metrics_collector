@@ -24,10 +24,14 @@ class OptparseMetrics
       opts.separator "Specific options:"
 
       opts.on("-o", "--outputs x,y,z", Array, "List of outputs for metrics") do |outputs|
+        raise 'One of the requested outputs is not supported' if (outputs.map(&:downcase) - ['csv', 'json', 'console']).any?
+
         options.outputs = outputs.map(&:downcase)
       end
 
       opts.on("-l", "--libraries x,y,z", Array, "List of libraries.") do |libraries|
+        raise 'One of the requested libraries is not supported' if (libraries.map(&:downcase) - ['cloc', 'brakeman', 'simplecov', 'rubycritic']).any?
+
         options.libraries = libraries.map(&:downcase)
       end
 
