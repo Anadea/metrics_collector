@@ -63,4 +63,4 @@ end
 
 options = OptparseMetrics.parse(ARGV)
 
-Resolver.call(options.libraries, options.outputs, options.channels, options.token)
+Resolver.new(options.libraries, options.outputs, options.channels, options.token).call
