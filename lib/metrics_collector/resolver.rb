@@ -1,57 +1,34 @@
 require_relative 'helper'
 
-module Resolver
-  class << self
-    def call(libraries, output)
-      validate_libs(libraries)
-      validate_outputs(output)
+class Resolver
+  def initialize(libraries, output, channels, token)
+    @libraries = validate_libs(libraries)
+    @output    = validate_outputs(output)
+    @channels  = channels
+    @token     = token
+  end
 
-      metrics = call_handlers(libraries)
-      generate_reports(output, metrics)
-    end
+  def call
+    metrics = MetricsCollector.call(@libraries)
+    generate_reports(metrics)
+  end
 
-    private
+  private
 
-    def call_handlers(libraries)
-      libraries = check_libs(libraries)
-      MetricsCollector.call(libraries)
-    end
+  def generate_reports(metrics)
+    paths = ReportsHandler.call(@output, metrics)
+    SlackNotifier.new(@channels, @token, @output, metrics, paths).call
+  end
 
-    def generate_reports(output, metrics)
-      output = check_output(output)
-      ReportsHandler.call(output, metrics)
-    end
+  def validate_libs(libraries)
+    return ['cloc', 'brakeman', 'simplecov', 'rubycritic'] if libraries.nil?
 
-    def check_libs(libraries)
-      return SupportedLibs::SUPPORTED_LIBRARIES if libraries.nil? || libraries == 'all'
+    libraries
+  end
 
-      libraries
-    end
+  def validate_outputs(output)
+    return ['csv', 'json', 'console'] if output.nil?
 
-    def check_output(output)
-      return SupportedOutput::SUPPORTED_OUTPUT if output.nil? || output == 'all'
-
-      output
-    end
-
-    def validate_libs(libraries)
-      return if libraries == 'all'
-
-      if !libraries.nil?
-        unless (libraries - SupportedLibs::SUPPORTED_LIBRARIES)
-          raise 'One of the requested libraries is not supported'
-        end
-      end
-    end
-
-    def validate_outputs(output)
-      return if output == 'all'
-
-      if !output.nil?
-        unless (output - SupportedOutput::SUPPORTED_OUTPUT)
-          raise 'One of the requested outputs is not supported'
-        end
-      end
-    end
+    output
   end
 end
