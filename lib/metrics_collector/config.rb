@@ -4,24 +4,20 @@ require 'yaml'
 
 module MetricsCollector
   class Config
-    # TODO
-    # DEFAULT_CONFIG = File.join('config', 'default.yml')
-    # USER_CONFIG    = '.metrics_collector.yml'.freeze
-
     def call
-      # TODO RETURN DEFAULT CONFIG UNLESS EXTERNAL CONFIG EXISTS
       merge_configs(default_config, external_config)
     end
 
     private
 
     def default_config
-      YAML.load_file("config/default.yml")
+      YAML.load_file(File.join(__dir__, '../../config/default.yml'))
     end
 
     def external_config
+      return default_config unless File.exist?(".metrics_collector.yml")
+
       YAML.load_file(".metrics_collector.yml")
-      # TODO YAML.load_file("#{RAILS_ROOT}/.metrics_collector.yml")
     end
 
     def merge_configs(default, external, &block)
@@ -73,15 +69,15 @@ module MetricsCollector
     end
 
     def brakeman_errors
-      @config['scan_info']['errors'][0].split(',').collect(&:strip)
+      @config['brakeman']['errors_path'][0].split(',').collect(&:strip)
     end
 
     def brakeman_security_warnings
-      @config['scan_info']['security_warnings'][0].split(',').collect(&:strip)
+      @config['brakeman']['security_warnings_path'][0].split(',').collect(&:strip)
     end
 
     def brakeman_ignored_warnings
-      @config['scan_info']['ignored_warnings'][0].split(',').collect(&:strip)
+      @config['brakeman']['ignored_warnings_path'][0].split(',').collect(&:strip)
     end
   end
 end
