@@ -30,5 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubycritic'
   spec.add_dependency 'simplecov'
   spec.add_dependency 'OptionParser'
+  spec.add_dependency 'activesupport'
   spec.executables = ['metrics_collector']
 end

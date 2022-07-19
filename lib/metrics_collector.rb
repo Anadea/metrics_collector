@@ -2,12 +2,15 @@ require_relative 'metrics_collector/gem_handlers/BrakemanHandler'
 require_relative 'metrics_collector/gem_handlers/ClocHandler'
 require_relative 'metrics_collector/gem_handlers/RubycriticHandler'
 require_relative 'metrics_collector/gem_handlers/SimplecovHandler'
+require_relative 'metrics_collector/config'
 require 'active_support/inflector'
 
 module MetricsCollector
   require 'railtie' if defined?(Rails)
 
   class Error < StandardError; end
+
+  CONFIG = ConfigObject.new
 
   class << self
     METRICS = {}
