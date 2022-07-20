@@ -42,7 +42,7 @@ class SlackNotifier
 		@channels.each do |channel|
 			form_data = {
 				'channel' => channel,
-				'text'    => @metrics.map{|metric, value| "#{metric.to_s.humanize}: #{value}"}.join("\n")
+				'text'    => @metrics.map{|metric, value| "#{format_for_message(metric.to_s)}: #{value}"}.join("\n")
 			}
 
 			send_request(messages_endpoint, form_data)
@@ -56,5 +56,11 @@ class SlackNotifier
 		request = Net::HTTP::Post.new(uri.request_uri, @headers)
 		request.set_form payload, 'multipart/form-data'
 		http.request(request)
+	end
+
+	def format_for_message(metric)
+		return metric unless metric.include? '_'
+
+		metric.split('_').join(' ')
 	end
 end
