@@ -45,7 +45,7 @@ module MetricsCollector
     end
 
     def simplecov_total_coverage
-      @config['simplecov']['coverage_path'][0].split(',').collect(&:strip)
+      format_path(@config['simplecov']['coverage_path'])
     end
 
     def rubycritic_output_path
@@ -53,7 +53,7 @@ module MetricsCollector
     end
 
     def rubycritic_score
-      @config['rubycritc']['score_path'][0].split(',').collect(&:strip)
+      format_path(@config['rubycritc']['score_path'])
     end
 
     def cloc_report_path
@@ -61,23 +61,27 @@ module MetricsCollector
     end
 
     def cloc_total_lines
-      @config['cloc']['total_lines_path'][0].split(',').collect(&:strip)
+      format_path(@config['cloc']['total_lines_path'])
     end
 
     def cloc_total_files
-      @config['cloc']['total_files_path'][0].split(',').collect(&:strip)
+      format_path(@config['cloc']['total_files_path'])
     end
 
     def brakeman_errors
-      @config['brakeman']['errors_path'][0].split(',').collect(&:strip)
+      format_path(@config['brakeman']['errors_path'])
     end
 
     def brakeman_security_warnings
-      @config['brakeman']['security_warnings_path'][0].split(',').collect(&:strip)
+      format_path(@config['brakeman']['security_warnings_path'])
     end
 
     def brakeman_ignored_warnings
-      @config['brakeman']['ignored_warnings_path'][0].split(',').collect(&:strip)
+      format_path(@config['brakeman']['ignored_warnings_path'])
+    end
+
+    def format_path(path)
+      path[0].split(',').collect(&:strip)
     end
   end
 end
