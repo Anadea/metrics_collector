@@ -24,7 +24,7 @@ If bundler is not being used to manage dependencies, install the gem by executin
     $ gem install metrics_collector
 
 ## Requirements
-* Ruby 2.5+
+* Ruby 2.4+
 
 ## Usage
 
