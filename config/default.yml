@@ -28,6 +28,12 @@ brakeman:
   ignored_warnings_path:
     - 'scan_info,ignored_warnings'
 
+google_spreadsheet:
+  structure:
+    - 'date,firstcol,secondcol'
+  title:
+    - 'title_of_spreadsheet'
+
 libraries:
   - cloc
   - simplecov

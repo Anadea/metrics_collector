@@ -1,4 +1,5 @@
 require_relative 'helper'
+require_relative 'report_generators/SpreadsheetUploader'
 
 class Resolver
   def initialize(libraries, output, channels, token)
@@ -18,6 +19,7 @@ class Resolver
   def generate_reports(metrics)
     paths = ReportsHandler.call(@output, metrics)
     SlackNotifier.new(@channels, @token, @output, metrics, paths).call
+    SpreadsheetUploader.new(metrics).update_spreadsheet # TODO if config exists for google and -s(--spreadsheet) flag passed
   end
 
   def validate_libs(libraries)
