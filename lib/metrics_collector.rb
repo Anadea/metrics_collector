@@ -2,12 +2,14 @@ require_relative 'metrics_collector/gem_handlers/BrakemanHandler'
 require_relative 'metrics_collector/gem_handlers/ClocHandler'
 require_relative 'metrics_collector/gem_handlers/RubycriticHandler'
 require_relative 'metrics_collector/gem_handlers/SimplecovHandler'
-require 'active_support/inflector'
+require_relative 'metrics_collector/config'
 
 module MetricsCollector
   require 'railtie' if defined?(Rails)
 
   class Error < StandardError; end
+
+  CONFIG = ConfigObject.new
 
   class << self
     METRICS = {}
@@ -20,11 +22,12 @@ module MetricsCollector
     private
 
     def collect_metrics(libraries)
-      handlers = libraries.map(&:downcase).map(&:capitalize).map{ |lib| lib + 'Handler' }
+      libraries = libraries.map(&:downcase)
 
-      handlers.each do |library|
-        library.constantize.call(METRICS)
-      end
+      BrakemanHandler.call(METRICS)   if libraries.include? 'brakeman'
+      ClocHandler.call(METRICS)       if libraries.include? 'cloc'
+      RubycriticHandler.call(METRICS) if libraries.include? 'rubycritic'
+      SimplecovHandler.call(METRICS)  if libraries.include? 'simplecov'
     end
   end
 end

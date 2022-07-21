@@ -14,11 +14,13 @@ class RubycriticHandler
     end
 
     def collect_data(metrics)
-      return 'tmp/rubycritic/report.json not found' unless File.exist?('tmp/rubycritic/report.json')
+      rubycritic_file = MetricsCollector::CONFIG.rubycritic_output_path
+
+      return "#{rubycritic_file} not found" unless File.exist?("#{rubycritic_file}")
 
       rubycritic = File.read('tmp/rubycritic/report.json')
       rubycritic_result = JSON.parse(rubycritic)
-      metrics[:Rubycritic_score] = rubycritic_result['score']
+      metrics[:Rubycritic_score] = rubycritic_result.dig(*MetricsCollector::CONFIG.rubycritic_score)
     end
   end
 end

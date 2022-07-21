@@ -1,0 +1,35 @@
+# Default application configuration.
+
+simplecov:
+  report_path:
+    - public/coverage/.last_run.json
+  coverage_path:
+    - 'result,line'
+
+rubycritc:
+  report_path:
+    - tmp/rubycritic/report.json
+  score_path:
+    - score
+
+cloc:
+  report_path:
+    - stats.json
+  total_lines_path:
+    - 'header,n_lines'
+  total_files_path:
+    - 'header,n_files'
+
+brakeman:
+  errors_path:
+    - 'scan_info,errors'
+  security_warnings_path:
+    - 'scan_info,security_warnings'
+  ignored_warnings_path:
+    - 'scan_info,ignored_warnings'
+
+libraries:
+  - cloc
+  - simplecov
+  - brakeman
+  - rubycritic

@@ -20,12 +20,14 @@ class ClocHandler
     end
 
     def collect_data(metrics)
-      return 'stats.json not found (cloc)' unless File.exist?('stats.json')
+      cloc_file = MetricsCollector::CONFIG.cloc_report_path
+
+      return "#{cloc_file} not found (cloc)" unless File.exist?("#{cloc_file}")
 
       cloc = File.read('stats.json')
       cloc_result = JSON.parse(cloc)
-      metrics[:Cloc_total_lines] = cloc_result['header']['n_lines']
-      metrics[:Cloc_total_files] = cloc_result['header']['n_files']
+      metrics[:Cloc_total_lines] = cloc_result.dig(*MetricsCollector::CONFIG.cloc_total_lines)
+      metrics[:Cloc_total_files] = cloc_result.dig(*MetricsCollector::CONFIG.cloc_total_files)
     end
   end
 end

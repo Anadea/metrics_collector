@@ -11,14 +11,20 @@ module ReportsHandler
 
     private
 
-    def generate_reports(output, metrics)
+    def generate_reports(outputs, metrics)
+      outputs = outputs.map(&:downcase)
       paths = {}
-      output.each do |option|
-        generate_file = "#{option.downcase.capitalize}Generator".constantize.new(metrics).call
-        paths[option] = generate_file unless option == 'console'
-      end
-
+      paths['csv']  = generate_csv(metrics)  if outputs.include? 'csv'
+      paths['json'] = generate_json(metrics) if outputs.include? 'json'
       paths
+    end
+
+    def generate_csv(metrics)
+      CsvGenerator.new(metrics).call
+    end
+
+    def generate_json(metrics)
+      JsonGenerator.new(metrics).call
     end
   end
 end
