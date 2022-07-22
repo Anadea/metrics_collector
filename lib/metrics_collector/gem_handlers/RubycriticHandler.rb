@@ -20,7 +20,7 @@ class RubycriticHandler
 
       rubycritic = File.read('tmp/rubycritic/report.json')
       rubycritic_result = JSON.parse(rubycritic)
-      metrics[:Rubycritic_score] = rubycritic_result.dig(*MetricsCollector::CONFIG.rubycritic_score)
+      metrics[:rubycritic_score] = rubycritic_result.dig(*MetricsCollector::CONFIG.rubycritic_score)
     end
   end
 end

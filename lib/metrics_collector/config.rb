@@ -80,6 +80,20 @@ module MetricsCollector
       format_path(@config['brakeman']['ignored_warnings_path'])
     end
 
+    def google_drive_config
+      file_name = 'public/client_secret.json'
+
+      File.open(file_name, 'w') do |json|
+        json.write(@config['google_spreadsheet']['client_secret'])
+      end
+
+      file_name
+    end
+
+    def spreadsheet_id
+      @config['google_spreadsheet']['spreadsheet_id']
+    end
+
     def format_path(path)
       path[0].split(',').collect(&:strip)
     end
