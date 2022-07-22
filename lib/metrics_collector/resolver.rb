@@ -19,7 +19,7 @@ class Resolver
   def generate_reports(metrics)
     paths = ReportsHandler.call(@output, metrics)
     SlackNotifier.new(@channels, @token, @output, metrics, paths).call
-    MetricsCollector::SpreadsheetUploader.new(metric_values(metrics)).update_spreadsheet unless # todo ???
+    MetricsCollector::SpreadsheetUploader.new(metric_values(metrics)).update_spreadsheet # unless # todo ???
   end
 
   def metric_values(metrics)
