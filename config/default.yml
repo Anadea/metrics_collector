@@ -19,6 +19,8 @@ cloc:
     - 'header,n_lines'
   total_files_path:
     - 'header,n_files'
+  ignored_directories:
+    - 'tmp,public,node_modules,vendor'
 
 brakeman:
   errors_path:

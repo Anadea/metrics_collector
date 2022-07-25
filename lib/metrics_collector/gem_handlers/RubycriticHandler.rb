@@ -16,7 +16,7 @@ class RubycriticHandler
     def collect_data(metrics)
       rubycritic_file = MetricsCollector::CONFIG.rubycritic_output_path
 
-      return "#{rubycritic_file} not found" unless File.exist?("#{rubycritic_file}")
+      return "#{rubycritic_file} not found" unless File.exist?(rubycritic_file)
 
       rubycritic = File.read('tmp/rubycritic/report.json')
       rubycritic_result = JSON.parse(rubycritic)
