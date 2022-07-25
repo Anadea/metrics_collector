@@ -15,14 +15,13 @@ class ClocHandler
     end
 
     def run_cloc
-      cloc = File.open('.clocignore', 'w') { |f| f.write("node_modules\ntmp\npublic") }
-      system("cloc --json --out=stats.json --exclude-dir=$(tr '\n' ',' < .clocignore) .")
+      system("cloc --json --out=stats.json --exclude-dir=#{MetricsCollector::CONFIG.cloc_ignored_directories} .")
     end
 
     def collect_data(metrics)
       cloc_file = MetricsCollector::CONFIG.cloc_report_path
 
-      return "#{cloc_file} not found (cloc)" unless File.exist?("#{cloc_file}")
+      return "#{cloc_file} not found (cloc)" unless File.exist?(cloc_file)
 
       cloc = File.read('stats.json')
       cloc_result = JSON.parse(cloc)
