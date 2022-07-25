@@ -1,4 +1,5 @@
 require "google_drive"
+require 'bundler'
 
 module MetricsCollector
   class SpreadsheetUploader

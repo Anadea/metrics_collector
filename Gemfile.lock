@@ -4,6 +4,7 @@ PATH
     metrics_collector (1.1.1)
       OptionParser
       brakeman
+      google_drive
       rubycritic
       simplecov
 
