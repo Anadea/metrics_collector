@@ -1,5 +1,9 @@
 [![GitHub version](https://badge.fury.io/gh/Anadea%2Fmetrics_collector.svg)](https://badge.fury.io/gh/Anadea%2Fmetrics_collector)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Anadea/metrics_collector/master/logo/MetricsCollector.png" width="80%" alt="MetricsCollector Logo"/>
+</p>
+
 # MetricsCollector
 
 MetricsCollector is a gem for Ruby on Rails designed to collect different metrics from projects,
