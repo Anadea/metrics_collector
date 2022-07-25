@@ -1,3 +1,5 @@
+require "google_drive"
+
 module MetricsCollector
   class SpreadsheetUploader
     def initialize(metrics)
