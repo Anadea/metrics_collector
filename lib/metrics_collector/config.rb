@@ -60,6 +60,10 @@ module MetricsCollector
       @config['cloc']['report_path'][0]
     end
 
+    def cloc_ignored_directories
+      @config['cloc']['ignored_directories'][0]
+    end
+
     def cloc_total_lines
       format_path(@config['cloc']['total_lines_path'])
     end
