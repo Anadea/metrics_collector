@@ -19,11 +19,13 @@ class Resolver
   def generate_reports(metrics)
     paths = ReportsHandler.call(@output, metrics)
     SlackNotifier.new(@channels, @token, @output, metrics, paths).call
-    MetricsCollector::SpreadsheetUploader.new(metric_values(metrics)).update_spreadsheet # unless # todo ???
+    # MetricsCollector::SpreadsheetUploader.new(metric_values(metrics)).update_spreadsheet # unless # todo ???
+    MetricsCollector::SpreadsheetUploader.new(metric_values(metrics)).call
   end
 
   def metric_values(metrics)
-    Hash[ metrics.sort_by { |key, val| key.to_s } ].values
+    metrics_values = Hash[ metrics.sort_by { |key, val| key.to_s } ].values
+    metrics_values.prepend(Time.now.strftime("%d %b %Y"))
   end
 
   def validate_libs(libraries)

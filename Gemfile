@@ -4,5 +4,4 @@ gemspec
 
 gem 'rake'
 gem 'rspec'
-gem 'google_drive'
-gem 'pry'
+gem 'google-api-client'
