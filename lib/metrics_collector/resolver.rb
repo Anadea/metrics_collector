@@ -2,11 +2,13 @@ require_relative 'helper'
 require_relative 'report_generators/SpreadsheetUploader'
 
 class Resolver
-  def initialize(libraries, output, channels, token, spreadsheet)
-    @libraries = validate_libs(libraries)
-    @output    = validate_outputs(output)
-    @channels  = channels
-    @token     = token
+  def initialize(libraries, output, channels, token, spreadsheet, client_secret)
+    @libraries     = validate_libs(libraries)
+    @output        = validate_outputs(output)
+    @channels      = channels
+    @token         = token
+    @client_secret = client_secret
+    @spreadsheet   = spreadsheet
   end
 
   def call
@@ -19,8 +21,7 @@ class Resolver
   def generate_reports(metrics)
     paths = ReportsHandler.call(@output, metrics)
     SlackNotifier.new(@channels, @token, @output, metrics, paths).call
-    # MetricsCollector::SpreadsheetUploader.new(metric_values(metrics)).update_spreadsheet # unless # todo ???
-    MetricsCollector::SpreadsheetUploader.new(metric_values(metrics)).call
+    MetricsCollector::SpreadsheetUploader.new(metric_values(metrics), @spreadsheet, @client_secret).call
   end
 
   def metric_values(metrics)

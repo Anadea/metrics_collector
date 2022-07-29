@@ -7,15 +7,17 @@ module MetricsCollector
   class SpreadsheetUploader
     SCOPE = ['https://www.googleapis.com/auth/spreadsheets',
              'https://www.googleapis.com/auth/drive']
-    CREDENTIALS_PATH = 'inspired-rock-336213-161cc290d73b.json'
-    SPREADSHEET = '1q-rYhDvFCRWWnHT2ZbpzzkNB6kxSaXasvjhzTm9XVI0'
 
-    def initialize(metric_values)
-      @request_body = { values: [metric_values] }
-      @service = Google::Apis::SheetsV4::SheetsService.new
+    def initialize(metric_values, spreadsheet, credentials)
+      @request_body  = { values: [metric_values] }
+      @service       = Google::Apis::SheetsV4::SheetsService.new
+      @spreadsheet   = spreadsheet(spreadsheet)
+      @client_secret = client_secret(credentials)
     end
 
     def call
+      return if @client_secret.string == 'null'
+
       authorize
       upload_metrics
     end
@@ -23,21 +25,33 @@ module MetricsCollector
     private
 
     def create_credentials
-      client_secret = StringIO.new(File.read(CREDENTIALS_PATH))
-      Google::Auth::ServiceAccountCredentials.make_creds(json_key_io: client_secret, scope: SCOPE )
+      Google::Auth::ServiceAccountCredentials.make_creds(json_key_io: @client_secret, scope: SCOPE )
     end
 
     def authorize
-      credentials = create_credentials
-      @service.authorization = credentials
+      @service.authorization = create_credentials
     end
     
     def upload_metrics
-      @service.append_spreadsheet_value(SPREADSHEET,'1:1', @request_body, value_input_option: 'USER_ENTERED' )
+      @service.append_spreadsheet_value(@spreadsheet,'1:1', @request_body, value_input_option: 'USER_ENTERED' )
     end
 
-    def generate_credentials
+    def client_secret(credentials)
+      return format_credentials(credentials) unless credentials.nil?
 
+      StringIO.new(MetricsCollector::CONFIG.google_client_secret.to_json)
+    end
+
+    def spreadsheet(spreadsheet)
+      return spreadsheet unless spreadsheet.nil?
+
+      MetricsCollector::CONFIG.google_spreadsheet_id
+    end
+
+    def format_credentials(credentials)
+      credentials['private_key'] = credentials['private_key'].gsub("\\n", "\n") if credentials['private_key']
+
+      StringIO.new(credentials.to_json)
     end
   end
 end
