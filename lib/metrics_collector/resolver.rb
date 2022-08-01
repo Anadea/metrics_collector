@@ -26,7 +26,7 @@ class Resolver
 
   def metric_values(metrics)
     metrics_values = Hash[ metrics.sort_by { |key, val| key.to_s } ].values
-    metrics_values.prepend(Time.now.strftime("%d %b %Y"))
+    metrics_values.unshift(Time.now.strftime("%d %b %Y"))
   end
 
   def validate_libs(libraries)
