@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require 'bundler/setup'
 require 'metrics_collector'
 require_relative '../lib/metrics_collector/helper'
@@ -43,8 +43,10 @@ class OptparseMetrics
       end
 
       opts.on("-sp", "--spreadsheet x,y,z", Array, "Send metrics to google spreadsheet document.") do |spreadsheet|
-        options.spreadsheet          = spreadsheet[0]
-        options.google_client_secret = Hash[*spreadsheet[1..-1]]
+        options.spreadsheet          = spreadsheet.shift
+        # binding.pry
+        options.google_client_secret = File.write('./spreadsheet_credentials.json', (spreadsheet * ','))
+        # JSON.parse(spreadsheet * ',')
       end
 
       opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|

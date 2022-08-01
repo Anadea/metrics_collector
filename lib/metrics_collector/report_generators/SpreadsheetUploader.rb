@@ -2,6 +2,7 @@ require "google/apis/sheets_v4"
 require "googleauth"
 require "googleauth/stores/file_token_store"
 require "fileutils"
+require 'pry'
 
 module MetricsCollector
   class SpreadsheetUploader
@@ -16,7 +17,7 @@ module MetricsCollector
     end
 
     def call
-      return if @client_secret.string == 'null'
+      return if @client_secret.nil?
 
       authorize
       upload_metrics
@@ -37,7 +38,8 @@ module MetricsCollector
     end
 
     def client_secret(credentials)
-      return format_credentials(credentials) unless credentials.nil?
+      # binding.pry
+      return StringIO.new(File.read('spreadsheet_credentials.json')) unless credentials.nil?
 
       StringIO.new(MetricsCollector::CONFIG.google_client_secret.to_json)
     end
@@ -45,13 +47,7 @@ module MetricsCollector
     def spreadsheet(spreadsheet)
       return spreadsheet unless spreadsheet.nil?
 
-      MetricsCollector::CONFIG.google_spreadsheet_id
-    end
-
-    def format_credentials(credentials)
-      credentials['private_key'] = credentials['private_key'].gsub("\\n", "\n") if credentials['private_key']
-
-      StringIO.new(credentials.to_json)
+      StringIO.new(MetricsCollector::CONFIG.google_spreadsheet_id.to_json)
     end
   end
 end
