@@ -30,6 +30,10 @@ brakeman:
   ignored_warnings_path:
     - 'scan_info,ignored_warnings'
 
+google_spreadsheet:
+  spreadsheet_id: 
+  client_secret:
+
 libraries:
   - cloc
   - simplecov

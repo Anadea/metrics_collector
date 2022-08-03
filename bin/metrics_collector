@@ -42,6 +42,11 @@ class OptparseMetrics
         options.channels = slack[1..-1]
       end
 
+      opts.on("-sp", "--spreadsheet x,y,z", Array, "Send metrics to google spreadsheet document.") do |spreadsheet|
+        options.spreadsheet          = spreadsheet.shift
+        options.google_client_secret = StringIO.new(File.read(spreadsheet.shift))
+      end
+
       opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
         options.verbose = v
       end
@@ -67,4 +72,10 @@ end
 
 options = OptparseMetrics.parse(ARGV)
 
-Resolver.new(options.libraries, options.outputs, options.channels, options.token).call
+Resolver.new(options.libraries,
+             options.outputs,
+             options.channels,
+             options.token,
+             options.spreadsheet,
+             options.google_client_secret
+            ).call

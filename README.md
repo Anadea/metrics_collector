@@ -1,7 +1,7 @@
 [![GitHub version](https://badge.fury.io/gh/Anadea%2Fmetrics_collector.svg)](https://badge.fury.io/gh/Anadea%2Fmetrics_collector)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Anadea/metrics_collector/master/logo/MetricsCollector.png" width="80%" alt="MetricsCollector Logo"/>
+  <img src="https://raw.githubusercontent.com/Anadea/metrics_collector/master/logo/MetricsCollector.png" width="60%" alt="MetricsCollector Logo"/>
 </p>
 
 # MetricsCollector
@@ -13,7 +13,7 @@ it provides commands to collect metrics from cloc, brakeman, rubycritic and simp
 * [Installation](#installation)
 * [Usage](#usage)
 * [Slack](#slack)
-* [Configuration](#configuration)
+* [Google Spreadsheet](#Spreadsheets)
 * [Changelog](#changelog)
 * [License](#license)
 
@@ -35,8 +35,9 @@ If bundler is not being used to manage dependencies, install the gem by executin
 Command Line Flag         | Description
 --------------------------|----------------------------------------------------
 `-l`/`--libraries`        | Specify which libraries you specifically want to run to collect metrics
-`-o`/`--outputs`          | Write output to a specific file formats (see [Supported libraries/outputs](#Supported-libraries/outputs))
+`-o`/`--outputs`          | Write output to a specific file formats (see [Supported libraries/outputs](#Supported_libraries/outputs))
 `-sl`/`--slack`           | Send metrics to slack channel (see [Slack](#slack))
+`-sp`/`--spreadsheet`     | Send metrics to google spreadsheet document (see [Spreadsheets](#spreadsheets))
 `-h`/`--help`             | Show command line flag documentation
 `-v`/`--version`          | Show version
 
@@ -73,14 +74,36 @@ Command Line Flag         | Description
 
 **Supported output formats**
 
-```sh
-console csv json
-```
+* CSV
+* JSON
+* Slack channel(s)
+* Google Spreadsheets
+* Console
 
 ## Slack
 **Send outputs to slack channel(s)**
 ```sh
 bundle exec metrics_collector --slack xoxp-slack-user-oath-token,CHANNELID2,CHANNELID8
+```
+
+## Spreadsheets
+**Send outputs to google spreadsheet document**
+
+Pass spreadsheet id and service account's details as an arguments
+```sh
+bundle exec metrics_collector --spreadsheet spredsheet_id,secret_key1,key1_value,secret_key2,key2_value...
+```
+
+You can also configure client secret in .metrics_collector.yml
+
+```yaml
+google_spreadsheet:
+  spreadsheet_id: spreadsheet_id
+  client_secret:
+    type: ''
+    project_id: ''
+    private_key_id: ''
+    ...
 ```
 
 ## Changelog
