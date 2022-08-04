@@ -84,6 +84,14 @@ module MetricsCollector
       format_path(@config['brakeman']['ignored_warnings_path'])
     end
 
+    def google_spreadsheet_id
+      @config['google_spreadsheet']['spreadsheet_id']
+    end
+
+    def google_client_secret
+      @config['google_spreadsheet']['client_secret']
+    end
+
     def format_path(path)
       path[0].split(',').collect(&:strip)
     end

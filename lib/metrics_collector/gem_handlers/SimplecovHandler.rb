@@ -13,7 +13,7 @@ class SimplecovHandler
 
       simplecov = File.read('public/coverage/.last_run.json')
       simplecov_result = JSON.parse(simplecov)
-      metrics[:Coverage] = simplecov_result.dig(*MetricsCollector::CONFIG.simplecov_total_coverage)
+      metrics[:coverage] = simplecov_result.dig(*MetricsCollector::CONFIG.simplecov_total_coverage)
     end
   end
 end
