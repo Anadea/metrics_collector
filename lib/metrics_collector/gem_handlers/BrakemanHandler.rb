@@ -18,9 +18,9 @@ class BrakemanHandler
 
       brakeman = File.read('public/brakeman.json')
       brakeman_result = JSON.parse(brakeman)
-      metrics[:Brakeman_errors]           = brakeman_result.dig(*MetricsCollector::CONFIG.brakeman_errors)
-      metrics[:Brakeman_warnings]         = brakeman_result.dig(*MetricsCollector::CONFIG.brakeman_security_warnings)
-      metrics[:Brakeman_ignored_warnings] = brakeman_result.dig(*MetricsCollector::CONFIG.brakeman_ignored_warnings)
+      metrics[:brakeman_errors]           = brakeman_result.dig(*MetricsCollector::CONFIG.brakeman_errors)
+      metrics[:brakeman_warnings]         = brakeman_result.dig(*MetricsCollector::CONFIG.brakeman_security_warnings)
+      metrics[:brakeman_ignored_warnings] = brakeman_result.dig(*MetricsCollector::CONFIG.brakeman_ignored_warnings)
     end
   end
 end

@@ -25,8 +25,8 @@ class ClocHandler
 
       cloc = File.read('stats.json')
       cloc_result = JSON.parse(cloc)
-      metrics[:Cloc_total_lines] = cloc_result.dig(*MetricsCollector::CONFIG.cloc_total_lines)
-      metrics[:Cloc_total_files] = cloc_result.dig(*MetricsCollector::CONFIG.cloc_total_files)
+      metrics[:cloc_total_lines] = cloc_result.dig(*MetricsCollector::CONFIG.cloc_total_lines)
+      metrics[:cloc_total_files] = cloc_result.dig(*MetricsCollector::CONFIG.cloc_total_files)
     end
   end
 end

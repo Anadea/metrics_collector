@@ -1,3 +1,7 @@
+## [1.2.0] - 2022-08-01
+
+- Add google spreadsheet support
+
 ## [1.1.1] - 2022-07-21
 
 - Downgrade required ruby version to 2.4.0
