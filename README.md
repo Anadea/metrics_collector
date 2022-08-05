@@ -91,7 +91,7 @@ bundle exec metrics_collector --slack xoxp-slack-user-oath-token,CHANNELID2,CHAN
 
 Pass spreadsheet id and service account's details as an arguments
 ```sh
-bundle exec metrics_collector --spreadsheet spredsheet_id,secret_key1,key1_value,secret_key2,key2_value...
+bundle exec metrics_collector --spreadsheet spredsheet_id,credentials_path
 ```
 
 You can also configure client secret in .metrics_collector.yml
@@ -118,3 +118,7 @@ Everyone interacting in the MetricsCollector project's codebases, issue trackers
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Article
+
+Check out our [article](https://anadea.info/blog/metrics-collector) about the process of creation of MetricsCollector.
